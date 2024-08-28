@@ -37,4 +37,32 @@ class BarangController extends Controller
         $barang = Barang::all();
         return view('viewBarangPage', compact('barang'));
     }
+
+
+
+    public function getBarangById($id)
+    {
+        $barang = Barang::find($id);
+        return view('editBarang', compact('barang'));
+    }
+    
+    public function updateBarang(Request $request, $id)
+    {
+        $request->validate([
+            'namaBarang' => 'required|string|max:255',
+            'hargaBarang' => 'required|string|max:255',
+            'jumlahBarang' => 'required|integer',
+        ]);
+    
+        $barang = Barang::find($id);
+        $barang->update([
+            'namaBarang' => $request->namaBarang,
+            'hargaBarang' => $request->hargaBarang,
+            'jumlahBarang' => $request->jumlahBarang,
+        ]);
+    
+        return redirect(route('getBarang'))->with('success', 'Barang Berhasil Diupdate!');
+    }
+    
+    
 }

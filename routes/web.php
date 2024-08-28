@@ -34,11 +34,18 @@ Route::get('/adminLogIn', function () {
     return view('adminLogIn');
 })->name('adminLogIn');
 
-// Route to display the form to create a new item
+// Route  display  form  create a new item
 Route::get('/adminCreate', [BarangController::class, 'getCreatePage'])->name('getCreatePage');
 
-// Route to handle the form submission for creating a new item
+// Route    form submission  creating a new item
 Route::post('/createBarang', [BarangController::class, 'createBarang'])->name('createBarang');
 
-// Route to view all items
+// Route  view all items
 Route::get('/viewBarangPage', [BarangController::class, 'getBarang'])->name('getBarang');
+
+// Route to display form for updating an item
+Route::get('/editBarang/{id}', [BarangController::class, 'getBarangById'])->name('editBarang');
+
+// Route for updating an item in the database
+Route::patch('/editBarang/{id}', [BarangController::class, 'updateBarang'])->name('updateBarang');
+

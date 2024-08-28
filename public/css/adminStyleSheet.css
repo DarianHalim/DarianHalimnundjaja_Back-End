@@ -27,8 +27,8 @@ body {
     display: flex;
     justify-content: space-around;
     font-weight: bold;
-    color: white;
     font-size: 1.5rem;
+    
 }
 
 .topContainer {
@@ -121,4 +121,69 @@ input{
 
 .searchButton:active{
     background-color: white;
+}
+
+.tableContainer{
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+}
+
+.viewTable{
+    text-align: center;
+
+    border-collapse: collapse;
+}
+
+th,td{
+    border-bottom: #000000
+    solid
+    2px;
+
+    padding: 2rem;
+
+
+}
+
+
+.editButton{
+    background-color: greenyellow;
+    width: 50%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+
+}
+
+.deleteButton{
+    background-color: #F44336;
+    width: 50%;
+
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+
+}
+
+.optionsButtonContainer{
+    padding-bottom: 3px;
+    padding-top: 3px;
+
+}
+
+.viewHeader{
+    color: black;
+    text-align: center;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+a:hover{
+    background-color: white;
+    color: #000000;
+    border-radius: 5px;
 }

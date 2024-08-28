@@ -14,9 +14,11 @@
     <div class="container">
         <div class="topContainer">
             <div class="navbarContainer">
-                <span>View</span>
-                <span>Create</span>
-                <span>Leave</span>
+                <div class="navbarContainer">
+                    <span><a href="{{ route('getBarang') }}">View</a></span>
+                    <span><a href="{{ route('getCreatePage') }}">Create</a></span>
+                    <span><a href="{{ route('getBarang') }}">Leave</a></span>
+                </div>
             </div>
 
             <h1 class="welcomeHeader">Buat Barang Baru</h1>

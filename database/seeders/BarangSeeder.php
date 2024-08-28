@@ -16,19 +16,15 @@ class BarangSeeder extends Seeder
     public function run()
     {
         Barang::create([
-            'title'=> "judul baru",
-            'author'=>  "penagrang baru",
-            'price'=> 1200,
-            'release'=> "2024-08-01",
-            'category_id'=>"1",
+            'namaBarang' => "Barang baru",
+            'hargaBarang' => 1200,
+            'jumlahBarang' => 10,
         ]);
 
         Barang::create([
-            'title'=> "judul baru ke 2",
-            'author'=>  "penagrang baru",
-            'price'=> 1200,
-            'release'=> "2024-08-01",
-            'category_id'=>"2",
+            'namaBarang' => "Barang baru ke 2",
+            'hargaBarang' => 1500,
+            'jumlahBarang' => 20,
         ]);
     }
 }
