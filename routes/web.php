@@ -49,3 +49,5 @@ Route::get('/editBarang/{id}', [BarangController::class, 'getBarangById'])->name
 // Route for updating an item in the database
 Route::patch('/editBarang/{id}', [BarangController::class, 'updateBarang'])->name('updateBarang');
 
+//Delete
+Route::delete('/delete-barang/{id}', [BarangController::class,'deleteBarang'])->name('deleteBarang');

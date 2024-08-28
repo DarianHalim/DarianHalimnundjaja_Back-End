@@ -56,7 +56,7 @@
                     @foreach ($barang as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->idBarang }}</td>
+                            <td>{{ $item->id }}</td>
                             <td>{{ $item->namaBarang }}</td>
                             <td>{{ $item->hargaBarang }}</td>
                             <td>{{ $item->jumlahBarang }}</td>
@@ -65,8 +65,12 @@
                                     <button type="button" class="editButton">Edit</button>
                                 </a>
                                 
-                
-                                <button class="deleteButton" type="submit">Delete</button>
+                                <form class="formDelete" action="{{ route('deleteBarang', ['id' => $item->id])}}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="deleteButton" type="submit">Delete</button>
+                                </form>
+                              
                             </td>
 
                         </tr>

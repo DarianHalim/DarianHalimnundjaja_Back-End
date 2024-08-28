@@ -38,8 +38,6 @@ class BarangController extends Controller
         return view('viewBarangPage', compact('barang'));
     }
 
-
-
     public function getBarangById($id)
     {
         $barang = Barang::find($id);
@@ -64,5 +62,9 @@ class BarangController extends Controller
         return redirect(route('getBarang'))->with('success', 'Barang Berhasil Diupdate!');
     }
     
-    
+    public function deleteBarang($id){
+        Barang::destroy($id);
+        return redirect(route('getBarang'));
+    }
+   
 }

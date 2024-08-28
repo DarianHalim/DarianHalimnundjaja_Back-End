@@ -21,11 +21,11 @@
         </div>
 
         <div class="welcomeBanner">
-            <h2 class="viewHeader">Edit Barang</h2>
+            <h1 class="welcomeHeader">Edit {{ $barang-> namaBarang }}</h1>
         </div>
     
         <div class="contentContainer">
-            <form action="{{ route('updateBarang', $barang->id) }}" method="POST">
+            <form action="{{ route('editBarang', $barang->id) }}" method="POST">
                 @csrf
                 @method('PATCH')
 
