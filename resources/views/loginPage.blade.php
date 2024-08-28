@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="welcomeHeaders">
-        <h1>Toko Kelontong Pak Raja</h1>
+        <h1 class="headerText" >Toko Kelontong Pak Raja</h1>
         <p>Jika tidak memiliki akun mohon <a href="{{ route('signup') }}">Register</a></p>
     </div>
 
