@@ -25,7 +25,7 @@
         </div>
     
         <div class="contentContainer">
-            <form action="{{ route('editBarang', $barang->id) }}" method="POST">
+            <form action="{{ route('updateBarang', $barang->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
 

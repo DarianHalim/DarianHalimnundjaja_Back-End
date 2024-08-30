@@ -57,44 +57,56 @@ class BarangController extends Controller
     }
     
     public function updateBarang(Request $request, $id)
-    {
-        $request->validate([
-            'namaBarang' => 'required|string|max:255',
-            'hargaBarang' => 'required|string|max:255',
-            'jumlahBarang' => 'required|integer',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Validation for image
-        ]);
+{
+    $request->validate([
+        'namaBarang' => 'required|string|max:255',
+        'hargaBarang' => 'required|string|max:255',
+        'jumlahBarang' => 'required|integer',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Validation for image
+    ]);
+
+    $barang = Barang::find($id);
+
+    // Handle image upload
+    if ($request->hasFile('image')) {
+        // Delete old image if it exists
+        if ($barang->image) {
+            Storage::disk('public')->delete('images/' . $barang->image);
+        }
+
+        $image = $request->file('image');
+        $extension = $image->getClientOriginalExtension();
+        $fileName = $request->namaBarang . '_' . time() . '.' . $extension; // Rename image file
+        $image->storeAs('public/images', $fileName); // Save image
+    } else {
+        // Keep old image if no new image is uploaded
+        $fileName = $barang->image;
+    }
+
+    $barang->update([
+        'namaBarang' => $request->namaBarang,
+        'hargaBarang' => $request->hargaBarang,
+        'jumlahBarang' => $request->jumlahBarang,
+        'image' => $fileName, // Update image field
+    ]);
+
+    return redirect(route('getBarang'))->with('success', 'Barang Berhasil Diupdate!');
+}
+
     
+    public function deleteBarang($id)
+    {
         $barang = Barang::find($id);
     
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            // Delete old image if it exists
-            if ($barang->image) {
-                Storage::disk('public')->delete('images/' . $barang->image);
-            }
-    
-            $image = $request->file('image');
-            $extension = $image->getClientOriginalExtension();
-            $fileName = $request->namaBarang . '_' . time() . '.' . $extension; // Rename image file
-            $image->storeAs('public/images', $fileName); // Save image
-        } else {
-            $fileName = $barang->image; // Keep old image if no new image is uploaded
+        // Delete the image if it exists
+        if ($barang->image) {
+            Storage::disk('public')->delete('images/' . $barang->image);
         }
     
-        $barang->update([
-            'namaBarang' => $request->namaBarang,
-            'hargaBarang' => $request->hargaBarang,
-            'jumlahBarang' => $request->jumlahBarang,
-            'image' => $fileName, // Update image field
-        ]);
+        $barang->delete(); // Delete the record from the database
     
-        return redirect(route('getBarang'))->with('success', 'Barang Berhasil Diupdate!');
+        return redirect(route('getBarang'))->with('success', 'Barang Berhasil Dihapus!');
     }
     
-    public function deleteBarang($id){
-        Barang::destroy($id);
-        return redirect(route('getBarang'));
-    }
    
 }
