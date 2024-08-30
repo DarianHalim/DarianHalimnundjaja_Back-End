@@ -74,3 +74,6 @@ Route::patch('/editBarang/{id}', [BarangController::class, 'updateBarang'])->nam
 
 //Delete
 Route::delete('/delete-barang/{id}', [BarangController::class,'deleteBarang'])->name('deleteBarang');
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

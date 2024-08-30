@@ -20,9 +20,6 @@ class BarangController extends Controller
             'jumlahBarang' => 'required|integer',
         ]);
 
-
-
-
         Barang::create([
             'namaBarang' => $request->namaBarang,
             'hargaBarang' => $request->hargaBarang,
