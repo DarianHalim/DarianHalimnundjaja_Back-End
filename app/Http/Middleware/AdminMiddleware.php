@@ -17,14 +17,11 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            if (Auth::user()->role != 'admin') {
-                return redirect()->route('getBarang');
-            }
-        } else {
-            return redirect()->route('createBarang');
+        if (Auth::check() && Auth::user()->role === 'admin') {
+            return $next($request);
         }
-        
-        return $next($request);
+
+        // Redirect to the view page if not authorized
+        return redirect()->route('getBarang');
     }
 }

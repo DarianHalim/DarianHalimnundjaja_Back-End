@@ -16,7 +16,6 @@
         <div class="topHeader">
             <div class="navbarContainer">
                 <span><a href="{{ route('getBarang') }}">View</a></span>
-                <span><a href="{{ route('getCreatePage') }}">Create</a></span>
                 <span><a href="{{ route('home') }}">Leave</a></span>
             </div>
 

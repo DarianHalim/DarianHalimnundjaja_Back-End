@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -34,12 +35,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 
 // Route for the home page
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('register');
 })->name('home');
 
 
@@ -50,23 +51,26 @@ Route::get('/signUp', function () {
 })->name('signup');
 
 
-// Route  display  form  create a new item
-Route::get('/adminCreate', [BarangController::class, 'getCreatePage'])->name('getCreatePage');
-
-// Route    form submission  creating a new item
-Route::post('/createBarang', [BarangController::class, 'createBarang'])->name('createBarang');
-
-// Route  view all items
+// Route to view all items
 Route::get('/viewBarangPage', [BarangController::class, 'getBarang'])->name('getBarang');
-
-// Route to display form for updating an item
-Route::get('/editBarang/{id}', [BarangController::class, 'getBarangById'])->name('editBarang');
-
-// Route for updating an item in the database
-Route::patch('/editBarang/{id}', [BarangController::class, 'updateBarang'])->name('updateBarang');
-
-//Delete
-Route::delete('/delete-barang/{id}', [BarangController::class,'deleteBarang'])->name('deleteBarang');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware('admin')->group(function () {
+    // Route to display form to create a new item
+    Route::get('/adminCreate', [BarangController::class, 'getCreatePage'])->name('getCreatePage');
+
+    // Route for form submission to create a new item
+    Route::post('/createBarang', [BarangController::class, 'createBarang'])->name('createBarang');
+
+
+    // Route to display form for updating an item
+    Route::get('/editBarang/{id}', [BarangController::class, 'getBarangById'])->name('editBarang');
+
+    // Route for updating an item in the database
+    Route::patch('/editBarang/{id}', [BarangController::class, 'updateBarang'])->name('updateBarang');
+
+    // Route for deleting an item
+    Route::delete('/delete-barang/{id}', [BarangController::class, 'deleteBarang'])->name('deleteBarang');
+});
