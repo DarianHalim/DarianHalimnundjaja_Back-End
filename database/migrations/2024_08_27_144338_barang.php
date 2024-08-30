@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('namaBarang');
             $table->string('hargaBarang');
             $table->integer('jumlahBarang');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +28,7 @@ return new class extends Migration
      *
      * @return void
      */
+     
     public function down()
     {
         Schema::dropIfExists('barang');

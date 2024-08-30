@@ -44,6 +44,17 @@
                     <input type="number" name="jumlahBarang" id="jumlahBarang" value="{{ $barang->jumlahBarang }}" required>
                 </div>
 
+                <div class="inputContainer">
+                    <label for="image">Image</label>
+                    <input type="file" name="image" id="image">
+                    
+                    @if($barang->image)
+                        <img src="{{ asset('storage/images/' . $barang->image) }}" alt="Current Image" style="width: 100px; height: auto;">
+                    @endif
+                </div>
+
+
+
                 <button type="submit">Update</button>
             </form>
         </div>

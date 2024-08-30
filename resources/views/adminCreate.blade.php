@@ -43,6 +43,11 @@
                         <input type="number" name="jumlahBarang" id="jumlahBarang" required>
                     </div>
 
+                    <div class="inputContainer">
+                        <label for="imageBarang">Foto Barang</label>
+                        <input  id="imageBarang" type="file" name="image">
+                    </div>
+                        
                     <button type="submit">Create</button>
                 </form>
             </div>

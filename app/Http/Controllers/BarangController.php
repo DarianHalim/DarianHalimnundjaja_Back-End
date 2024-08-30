@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class BarangController extends Controller
 {
@@ -18,13 +20,26 @@ class BarangController extends Controller
             'namaBarang' => 'required|string|max:255',
             'hargaBarang' => 'required|string|max:255',
             'jumlahBarang' => 'required|integer',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // validasi format img
         ]);
-
+    
+        // uplod gambar
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $extension = $image->getClientOriginalExtension();
+            $fileName = $request->namaBarang.'_'.time().'.'.$extension; // beri nama imej di DB
+            $image->storeAs('public/images', $fileName); // simpan Imej
+        } else {
+            $fileName = null; // takeda gambar
+        }
+    
         Barang::create([
             'namaBarang' => $request->namaBarang,
             'hargaBarang' => $request->hargaBarang,
             'jumlahBarang' => $request->jumlahBarang,
+            'image' => $fileName, // simpan imej ke DB
         ]);
+    
         return redirect(route('getBarang'))->with('success', 'Barang Berhasil Dibuat!');
     }
 
@@ -47,13 +62,31 @@ class BarangController extends Controller
             'namaBarang' => 'required|string|max:255',
             'hargaBarang' => 'required|string|max:255',
             'jumlahBarang' => 'required|integer',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Validation for image
         ]);
     
         $barang = Barang::find($id);
+    
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Delete old image if it exists
+            if ($barang->image) {
+                Storage::disk('public')->delete('images/' . $barang->image);
+            }
+    
+            $image = $request->file('image');
+            $extension = $image->getClientOriginalExtension();
+            $fileName = $request->namaBarang . '_' . time() . '.' . $extension; // Rename image file
+            $image->storeAs('public/images', $fileName); // Save image
+        } else {
+            $fileName = $barang->image; // Keep old image if no new image is uploaded
+        }
+    
         $barang->update([
             'namaBarang' => $request->namaBarang,
             'hargaBarang' => $request->hargaBarang,
             'jumlahBarang' => $request->jumlahBarang,
+            'image' => $fileName, // Update image field
         ]);
     
         return redirect(route('getBarang'))->with('success', 'Barang Berhasil Diupdate!');
