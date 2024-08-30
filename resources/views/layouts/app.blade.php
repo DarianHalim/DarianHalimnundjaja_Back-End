@@ -8,6 +8,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
+        <link rel="stylesheet" href="{{ asset('css/loginStyleSheet.css')}}">
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
@@ -15,21 +16,26 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="min-h-screen" style="background-color: #F44336;">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+          
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                <div class="mainHeader">
+                    <h1>Toko Kelontong Pak Raja</h1>
+                    <h2>Harga Termurah Kualitas Terbaik</h2>
+                    <div class="logoTokoContainer">
+                        <img class="logoToko" src="https://png.pngtree.com/png-clipart/20230124/ourmid/pngtree-illustration-of-a-roadside-angkringan-stall-cart-png-image_6564707.png" alt="">
+                    </div>
+                   <h1>Silakan Melihat Barang Dagangan Kami</h1>
+                </div>
+
+                
+         
+
             </main>
         </div>
     </body>

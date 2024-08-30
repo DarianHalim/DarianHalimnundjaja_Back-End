@@ -42,20 +42,13 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-// Route for the login page
-Route::get('/login', function () {
-    return view('loginPage');
-})->name('login');
+
 
 // Route for the sign-up page
 Route::get('/signUp', function () {
     return view('signUpPage');
 })->name('signup');
 
-// Route for the admin login page
-Route::get('/adminLogIn', function () {
-    return view('adminLogIn');
-})->name('adminLogIn');
 
 // Route  display  form  create a new item
 Route::get('/adminCreate', [BarangController::class, 'getCreatePage'])->name('getCreatePage');

@@ -8,58 +8,24 @@ body{
     padding: 0;
 }   
 
-.welcomeHeaders{
+.mainHeader{
     text-align: center;
     font-weight: bolder;
-   color: black;
+   color: white;
    margin-top: 0rem;
    padding-top: 0rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
 }
 
-.headerText{
-    color: black;
+.logoTokoContainer{
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
 }
 
-h1{
-    color: #FF1D18;
-}
+.logoToko{
 
-
-
-.formContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.signInContainer{
-    background-color: white;
-    padding: 4rem;
-    padding-top: 0.5rem;
-    border-radius: 0.5rem;
-}
-
-.InputContainers{
-    justify-content: space-around;
-    width: 50%;
-    padding-top: 1rem;
-}
-
-button{
-    margin-top: 1rem;
-    background-color: #FF1D18;
-    font-size: 1rem;
-    width: 50%;
-    border-radius: 0.5rem;
-    border-style: none;
-    font-weight: bold;
-    height: 2rem;
-}
-
-button:active{
-    background-color: black;
-}
-
-label,input{
-    font-weight: bold;
 }
