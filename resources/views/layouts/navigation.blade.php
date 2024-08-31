@@ -10,7 +10,7 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <h1 style="font-size: 1.5rem; align-self: center; font-weight: 600">Home</h1>
 
-                    <h1 style="font-size: 1.5rem; align-self: center"><a href="{{ route('getBarang') }}">View Products</a></h1>
+                    <h1 style="font-size: 1.5rem; align-self: center"><a href="{{ route('getKatalog') }}">Katalog</a></h1>
 
                     <span style="font-size: 1.5rem; align-self: center;"><a href="{{ route('home') }}">Cart</a></span>
 

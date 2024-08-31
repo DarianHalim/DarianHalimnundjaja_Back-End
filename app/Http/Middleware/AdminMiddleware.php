@@ -22,6 +22,6 @@ class AdminMiddleware
         }
 
         // Redirect to the view page if not authorized
-        return redirect()->route('getBarang');
+        return redirect()->route('getKatalog');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
 use App\Models\Barang;
 use Illuminate\Http\Request;
 use App\Models\Cart;
@@ -70,6 +71,25 @@ public function removeFromCart($cartId)
     } else {
         return redirect()->back()->with('error', 'Item not found!');
     }
+}
+
+public function store(Request $request)
+{
+    $request->validate([
+        'cart_id' => 'required|exists:carts,id',
+        'invoiceNo' => 'required|integer',
+        'alamat_pengiriman' => 'required|string|min:10|max:100',
+        'kode_pos' => 'required|string|size:5', // Use size for exact length
+    ]);
+
+    $invoice = new Invoice();
+    $invoice->cart_id = $request->input('cart_id');
+    $invoice->invoiceNo = $request->input('invoiceNo');
+    $invoice->alamat_pengiriman = $request->input('alamat_pengiriman');
+    $invoice->kode_pos = $request->input('kode_pos');
+    $invoice->save();
+
+    return redirect()->back()->with('success', 'Invoice created successfully!');
 }
 
 

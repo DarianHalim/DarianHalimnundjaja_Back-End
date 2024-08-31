@@ -60,8 +60,10 @@
                             <td>
                                 <form action="{{ route('removeFromCart', $item->id) }}" method="POST">
                                     @csrf
+                                    @method('DELETE')
                                     <button class="removeCartBTN" type="submit" class="remove-button">Remove</button>
                                 </form>
+                                
                             </td>
                         </tr>
                     @endforeach
