@@ -53,8 +53,12 @@
                             </td>
                             <td>Rp {{ number_format($item->barang->hargaBarang, 2) }}</td>
                             <td>Rp {{ number_format($item->barang->hargaBarang * $item->quantity, 2) }}</td>
+
                             <td>
-                                <button class="updateCartBTN" type="submit" class="update-button">Update</button>
+                                <form action="{{ route('removeFromCart', $item->id) }}" method="POST">
+                                    @csrf
+                                    <button class="updateCartBTN" type="submit" class="update-button">Update</button>
+                                </form>
                             </td>
 
                             <td>

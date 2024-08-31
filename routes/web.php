@@ -38,6 +38,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart',[cartController::class,'getCart'])->name('getCart');
     //add to cart
     Route::post('/cart/add', [cartController::class, 'addToCart'])->name('cartAdd');
+    // Route for updating the cart
+Route::post('/cart/update', [CartController::class, 'updateCart'])->name('updateCart');
+
+Route::delete('/cart/remove/{cartId}', [cartController::class, 'removeFromCart'])->name('removeFromCart');
 });
 
 require __DIR__ . '/auth.php';
@@ -56,10 +60,7 @@ Route::get('/signUp', function () {
 })->name('signup');
 
 
-// Route for updating the cart
-Route::post('/cart/update', [CartController::class, 'updateCart'])->name('updateCart');
 
-Route::post('/cart/remove/{cartId}', [cartController::class, 'removeFromCart'])->name('removeFromCart');
 
 
 Route::get('/userView', [BarangController::class, 'getKatalog'])->name('getKatalog');
