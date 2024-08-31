@@ -84,22 +84,9 @@
     </div>
 
     <div class="cartContainer">
-        <form action="{{ route('storeInvoice') }}" method="POST">
-            @csrf
-            <div class="zipnAdressContainer">
-                <div>
-                    <label for="address">Address</label>
-                    <input type="text" name="alamat_pengiriman" id="address" required>
-                </div>
-                <div>
-                    <label for="zip">Zip Code</label>
-                    <input type="text" name="kode_pos" id="zip" required>
-                </div>
-            </div>
-        
-            <button class="no-print" type="button" onclick="window.print()">Print Invoice</button>
-            <button type="submit" class="checkoutBTN">Checkout</button>
-        </form>
+
+
+    
 
         <div class="checkoutContainer">
             <div class="left-side">
@@ -121,6 +108,7 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 </body>
+
 </html>

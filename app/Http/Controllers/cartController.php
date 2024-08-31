@@ -17,14 +17,14 @@ class cartController extends Controller
             ->with('barang') // Fetch related barang data
             ->get();
 
-    
         $totalPrice = $cartItems->sum(function ($item) {
             return $item->barang->hargaBarang * $item->quantity;
         });
 
+
         return view('cart', [
             'cartItems' => $cartItems,
-            'totalPrice' => $totalPrice
+            'totalPrice' => $totalPrice,
         ]);
     }
 
@@ -40,59 +40,37 @@ class cartController extends Controller
     }
 
     public function updateCart(Request $request)
-{
-    $userId = Auth::id(); 
+    {
+        $userId = Auth::id(); 
 
-    foreach ($request->input('quantity') as $cartId => $quantity) {
-        $cart = Cart::where('user_id', $userId)
-                    ->where('id', $cartId)
-                    ->first();
-        
-        if ($cart) {
-            $cart->quantity = $quantity;
-            $cart->save();
+        foreach ($request->input('quantity') as $cartId => $quantity) {
+            $cart = Cart::where('user_id', $userId)
+                        ->where('id', $cartId)
+                        ->first();
+            
+            if ($cart) {
+                $cart->quantity = $quantity;
+                $cart->save();
+            }
+        }
+
+        return redirect()->back()->with('success', 'Cart updated successfully!');
+    }
+
+    public function removeFromCart($cartId)
+    {
+        $userId = Auth::id(); 
+
+        $cartItem = Cart::where('id', $cartId)
+                        ->where('user_id', $userId)
+                        ->first();
+
+        if ($cartItem) {
+            $cartItem->delete();
+            return redirect()->back()->with('success', 'Item removed from cart!');
+        } else {
+            return redirect()->back()->with('error', 'Item not found!');
         }
     }
-
-    return redirect()->back()->with('success', 'Cart updated successfully!');
-}
-
-public function removeFromCart($cartId)
-{
-    $userId = Auth::id(); 
-
-    $cartItem = Cart::where('id', $cartId)
-                    ->where('user_id', $userId)
-                    ->first();
-
-    if ($cartItem) {
-        $cartItem->delete();
-        return redirect()->back()->with('success', 'Item removed from cart!');
-    } else {
-        return redirect()->back()->with('error', 'Item not found!');
-    }
-}
-
-public function store(Request $request)
-{
-    $request->validate([
-        'cart_id' => 'required|exists:carts,id',
-        'invoiceNo' => 'required|integer',
-        'alamat_pengiriman' => 'required|string|min:10|max:100',
-        'kode_pos' => 'required|string|size:5', // Use size for exact length
-    ]);
-
-    $invoice = new Invoice();
-    $invoice->cart_id = $request->input('cart_id');
-    $invoice->invoiceNo = $request->input('invoiceNo');
-    $invoice->alamat_pengiriman = $request->input('alamat_pengiriman');
-    $invoice->kode_pos = $request->input('kode_pos');
-    $invoice->save();
-
-    return redirect()->back()->with('success', 'Invoice created successfully!');
-}
-
-
-
 
 }

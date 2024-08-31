@@ -44,7 +44,7 @@ Route::post('/cart/update', [CartController::class, 'updateCart'])->name('update
 Route::delete('/cart/remove/{cartId}', [cartController::class, 'removeFromCart'])->name('removeFromCart');
 
 
-Route::post('/invoice/store', [CartController::class, 'store'])->name('storeInvoice');
+
 });
 
 require __DIR__ . '/auth.php';
