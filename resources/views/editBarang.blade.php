@@ -53,7 +53,16 @@
                     @endif
                 </div>
 
-
+                <div class="inputContainer">
+                    <label for="imageBarang">Pilih Category</label>
+                    <select name="category_id" id="">
+                        @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                      
+                       </select>
+                </div>
+                    
 
                 <button type="submit">Update</button>
             </form>

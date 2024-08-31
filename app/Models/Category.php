@@ -12,4 +12,9 @@ class Category extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function barang(){
+        return $this->hasMany(Barang::class,'category_id','id');
+    }
+
 }

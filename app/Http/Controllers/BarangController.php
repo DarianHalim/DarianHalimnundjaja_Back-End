@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Category;   
 
 
 class BarangController extends Controller
 {
     public function getCreatePage()
     {
-        return view('adminCreate');
+        $categories = Category::all();
+        return view('adminCreate',['categories' => $categories]);
     }
 
     public function createBarang(Request $request)
@@ -38,6 +40,7 @@ class BarangController extends Controller
             'hargaBarang' => $request->hargaBarang,
             'jumlahBarang' => $request->jumlahBarang,
             'image' => $fileName, // simpan imej ke DB
+            'category_id' => $request->category_id,
         ]);
     
         return redirect(route('getBarang'))->with('success', 'Barang Berhasil Dibuat!');
@@ -47,14 +50,19 @@ class BarangController extends Controller
     {
 
         $barang = Barang::all();
+        $categories = Category::with('Barang')->get();
         return view('viewBarangPage', compact('barang'));
     }
 
     public function getBarangById($id)
     {
         $barang = Barang::find($id);
-        return view('editBarang', compact('barang'));
+        $categories = Category::all();
+        return view('editBarang', compact('barang', 'categories'));
     }
+
+   
+
     
     public function updateBarang(Request $request, $id)
 {
@@ -63,6 +71,7 @@ class BarangController extends Controller
         'hargaBarang' => 'required|string|max:255',
         'jumlahBarang' => 'required|integer',
         'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Validation for image
+        'category_id' => 'required|exists:categories,id', 
     ]);
 
     $barang = Barang::find($id);
@@ -88,6 +97,7 @@ class BarangController extends Controller
         'hargaBarang' => $request->hargaBarang,
         'jumlahBarang' => $request->jumlahBarang,
         'image' => $fileName, // Update image field
+        'category_id' => $request->category_id,
     ]);
 
     return redirect(route('getBarang'))->with('success', 'Barang Berhasil Diupdate!');

@@ -47,6 +47,16 @@
                         <label for="imageBarang">Foto Barang</label>
                         <input  id="imageBarang" type="file" name="image">
                     </div>
+
+                    <div class="inputContainer">
+                        <label for="category_id">Pilih Category</label>
+                        <select name="category_id" id="category_id" required>
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
                         
                     <button type="submit">Create</button>
                 </form>

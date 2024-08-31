@@ -45,6 +45,7 @@
                             <th scope="col">Nama Barang</th>
                             <th scope="col">Harga Barang</th>
                             <th scope="col">Jumlah Barang</th>
+                            <th scope="col">Kategori</th>
                             <th scope="col">Image</th>
                             <th scope="col">Options</th>
                         </tr>
@@ -60,6 +61,7 @@
                             <td>{{ $item->namaBarang }}</td>
                             <td>{{ $item->hargaBarang }}</td>
                             <td>{{ $item->jumlahBarang }}</td>
+                            <td> {{ $item->category->name }} </td>
                             <td>
                                 @if ($item->image)
                                     <img src="{{ asset('storage/images/' . $item->image) }}"
