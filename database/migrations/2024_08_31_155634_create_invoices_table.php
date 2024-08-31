@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('invoices', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // This creates an auto-incrementing primary key
             $table->unsignedBigInteger('cart_id'); // Foreign key reference to the carts table
             $table->integer('invoiceNo');
             $table->string('alamat_pengiriman'); // Alamat Pengiriman
-            $table->integer('kode_pos', 5); // Kode Pos
+            $table->string('kode_pos', 5); // Kode Pos - Corrected type and size
             $table->timestamps();
 
             // Define foreign key constraint

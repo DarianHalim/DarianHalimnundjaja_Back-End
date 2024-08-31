@@ -24,7 +24,7 @@
 
     <div class="cartContentContainer">
 
-      
+
 
         <form action="{{ route('updateCart') }}" method="POST">
             @csrf
@@ -67,7 +67,7 @@
                                     @method('DELETE')
                                     <button class="removeCartBTN" type="submit" class="remove-button">Remove</button>
                                 </form>
-                                
+
                             </td>
                         </tr>
                     @endforeach
@@ -75,22 +75,31 @@
             </table>
         </form>
 
-
-    </div>
-
-
-
-    <div class="cartContainer">
-
         <tfoot>
             <tr>
                 <td colspan="7" style="text-align: right; font-weight: bold;">Total Harga:</td>
                 <td>Rp {{ number_format($totalPrice, 2) }}</td>
             </tr>
         </tfoot>
+    </div>
 
-        <button class="no-print" onclick="window.print()">Print Invoice</button>
-
+    <div class="cartContainer">
+        <form action="{{ route('storeInvoice') }}" method="POST">
+            @csrf
+            <div class="zipnAdressContainer">
+                <div>
+                    <label for="address">Address</label>
+                    <input type="text" name="alamat_pengiriman" id="address" required>
+                </div>
+                <div>
+                    <label for="zip">Zip Code</label>
+                    <input type="text" name="kode_pos" id="zip" required>
+                </div>
+            </div>
+        
+            <button class="no-print" type="button" onclick="window.print()">Print Invoice</button>
+            <button type="submit" class="checkoutBTN">Checkout</button>
+        </form>
 
         <div class="checkoutContainer">
             <div class="left-side">
@@ -111,9 +120,7 @@
                 <div class="new">Payment</div>
             </div>
         </div>
-
     </div>
-
+</div>
 </body>
-
 </html>

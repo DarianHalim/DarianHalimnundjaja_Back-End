@@ -518,3 +518,10 @@ tr:hover {
     width: 100%;
     color: red;
 }
+
+
+.zipnAdressContainer{
+    display: flex;
+    flex-direction: column;
+}
+
