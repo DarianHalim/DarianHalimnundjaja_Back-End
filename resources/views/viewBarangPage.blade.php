@@ -71,18 +71,29 @@
                                 @endif
                             </td>
 
-                            <td class="optionsButtonContainer">
-                                <a href="{{ route('editBarang', $item->id) }}">
-                                    <button type="button" class="editButton">Edit</button>
-                                </a>
+                            <td class="viewButtonContainer">
 
-                                <form class="formDelete" action="{{ route('deleteBarang', ['id' => $item->id]) }}"
-                                    method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="deleteButton" type="submit">Delete</button>
-                                </form>
+                                <div>
+                                    <a href="{{ route('editBarang', $item->id) }}">
+                                        <button type="button" class="cartButton">Add To Cart</button>
+                                    </a>
+    
+                                </div>
 
+                                <div class="optionsButtonContainer">
+                                    <form class="formDelete" action="{{ route('deleteBarang', ['id' => $item->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="deleteButton" type="submit">Delete</button>
+                                    </form>
+    
+                                    <a href="{{ route('editBarang', $item->id) }}">
+                                        <button type="button" class="editButton">Edit</button>
+                                    </a>
+       
+                                </div>
+                              
                             </td>
 
                         </tr>
