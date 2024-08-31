@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>View Menu</title>
-    <link rel="stylesheet" href="{{ asset('css/adminStyleSheet.css') }}">
+    <link rel="stylesheet" href="{{ asset('userStyleSheet.css') }}">
 </head>
 
 <body>
@@ -73,6 +73,12 @@
 
                             <td class="viewButtonContainer">
 
+                                <div>
+                                    <a href="{{ route('editBarang', $item->id) }}">
+                                        <button type="button" class="cartButton">Add To Cart</button>
+                                    </a>
+    
+                                </div>
 
                                 <div class="optionsButtonContainer">
                                     <form class="formDelete" action="{{ route('deleteBarang', ['id' => $item->id]) }}"
