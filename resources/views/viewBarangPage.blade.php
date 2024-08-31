@@ -71,10 +71,9 @@
                                 @endif
                             </td>
 
-                            <td class="viewButtonContainer">
+                            <td class="optionsButtonContainer">
 
-
-                                <div class="optionsButtonContainer">
+                                <div >
                                     <form class="formDelete" action="{{ route('deleteBarang', ['id' => $item->id]) }}"
                                         method="POST">
                                         @csrf
