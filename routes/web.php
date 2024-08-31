@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\cartController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    //Show Cart
+    Route::get('/cart',[cartController::class,'getCart'])->name('getCart');
+    //add to cart
+    Route::post('/cart/add', [cartController::class, 'addToCart'])->name('cartAdd');
 });
 
 require __DIR__ . '/auth.php';

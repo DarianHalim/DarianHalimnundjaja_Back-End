@@ -16,7 +16,7 @@
 
         <div class="topHeader">
             <div class="navbarContainer">
-                <span><a href="{{ route('getKatalog') }}">Katalog</a></span>
+                <span><a href="{{ route('getCart') }}">To Cart</a></span>
                 <span><a href="{{ route('home') }}">Leave</a></span>
             </div>
 
@@ -48,7 +48,12 @@
 
                         
                     </div>
-                    <button class="card-button">Add To Cart</button>
+                    <form action="{{ route('cartAdd') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="barang_id" value="{{ $item->id }}">
+                        <button class="card-button">Add To Cart</button>
+                    </form>
+                   
                 </div>
             @endforeach
 
