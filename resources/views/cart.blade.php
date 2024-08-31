@@ -16,6 +16,7 @@
         <div class="topHeader">
             <div class="navbarContainer">
                 <span><a href="{{ route('getKatalog') }}">Katalog</a></span>
+                <span>Faktur for {{ Auth::user()->name }}</span>
                 <span><a href="{{ route('home') }}">Leave</a></span>
             </div>
         </div>
@@ -23,7 +24,7 @@
 
     <div class="cartContentContainer">
 
-        <h2>Faktur for {{ Auth::user()->name }}</h2>
+      
 
         <form action="{{ route('updateCart') }}" method="POST">
             @csrf
