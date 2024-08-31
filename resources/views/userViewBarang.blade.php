@@ -30,20 +30,20 @@
         <div class="viewContentContainer">
 
 
-            @foreach ($barang as $item)
-                <div class="card">
+                @foreach ($barang as $item)
+                    <div class="card">
                     <div class="card-details">
                         <p class="text-title">
                             @if ($item->image)
                             <img src="{{ asset('storage/images/' . $item->image) }}"
-                                alt="Image for {{ $item->namaBarang }}" style="width: 130px; height: auto;">
+                                alt="Image for {{ $item->namaBarang }}" style="width: 130px; height: auto; border-radius: 0.5rem">
                         @else
                             No image
                         @endif
                         </p>
                         <p class="text-title">{{ $item->namaBarang }}</p>
                         <p class="text-title">Harga: {{ $item->hargaBarang }}</p>
-                        <p class="text-title">Jumlah: {{ $item->jumlahBarang }}</p>
+                        <p class="text-title">Jumlah Barang: {{ $item->jumlahBarang }}</p>
                         <p class="text-title">Kategory:{{ $item->category->name }}</p>
 
                         
@@ -53,6 +53,7 @@
                         <input type="hidden" name="barang_id" value="{{ $item->id }}">
                         <button class="card-button">Add To Cart</button>
                     </form>
+
                    
                 </div>
             @endforeach

@@ -56,6 +56,10 @@ Route::get('/signUp', function () {
 })->name('signup');
 
 
+// Route for updating the cart
+Route::post('/cart/update', [CartController::class, 'updateCart'])->name('updateCart');
+
+Route::post('/cart/remove/{cartId}', [cartController::class, 'removeFromCart'])->name('removeFromCart');
 
 
 Route::get('/userView', [BarangController::class, 'getKatalog'])->name('getKatalog');

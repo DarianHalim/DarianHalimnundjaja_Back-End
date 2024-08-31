@@ -143,7 +143,7 @@ body {
         border-radius: 5px;
     }
 
-    /* From Uiverse.io by alexruix */
+  
     .card {
         width: 190px;
         height: 254px;
@@ -211,6 +211,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 1rem;
+
+    font-weight: bold;
 }
 
 
@@ -441,6 +444,7 @@ body {
 
 .checkoutContainer:hover .dollar {
     animation: fade-in-fwd 0.3s 1s backwards;
+    
 }
 
 @keyframes fade-in-fwd {
@@ -453,4 +457,64 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+
+.cartContentContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+   
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #e0e0e0;
+}
+
+.total-cost {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.quantity-input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin: 0 5px;
+    border-radius: 3px;
+}
+
+.updateCartBTN{
+    width: 100%;
+    color: green;
+}
+
+.removeCartBTN{
+    background-color: whitesmoke;
+    font-size: 10px;
+    width: 100%;
+    color: red;
 }
