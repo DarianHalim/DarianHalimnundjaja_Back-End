@@ -51,8 +51,7 @@ Route::get('/signUp', function () {
 })->name('signup');
 
 
-// Route to view all items
-Route::get('/viewBarangPage', [BarangController::class, 'getBarang'])->name('getBarang');
+
 
 Route::get('/userView', [BarangController::class, 'getKatalog'])->name('getKatalog');
 
@@ -61,6 +60,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware('admin')->group(function () {
     // Route to display form to create a new item
     Route::get('/adminCreate', [BarangController::class, 'getCreatePage'])->name('getCreatePage');
+
+    // Route to view all items
+Route::get('/viewBarangPage', [BarangController::class, 'getBarang'])->name('getBarang');
 
     // Route for form submission to create a new item
     Route::post('/createBarang', [BarangController::class, 'createBarang'])->name('createBarang');
