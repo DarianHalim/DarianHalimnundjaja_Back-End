@@ -19,12 +19,14 @@ class BarangSeeder extends Seeder
             'namaBarang' => "Barang baru",
             'hargaBarang' => 1200,
             'jumlahBarang' => 10,
+            'category_id'=>"1",
         ]);
 
         Barang::create([
             'namaBarang' => "Barang baru ke 2",
             'hargaBarang' => 1500,
             'jumlahBarang' => 20,
+            'category_id'=>"2",
         ]);
     }
 }
