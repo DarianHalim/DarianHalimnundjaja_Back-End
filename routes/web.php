@@ -54,6 +54,7 @@ Route::get('/signUp', function () {
 // Route to view all items
 Route::get('/viewBarangPage', [BarangController::class, 'getBarang'])->name('getBarang');
 
+Route::get('/userView', [BarangController::class, 'getKatalog'])->name('getKatalog');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

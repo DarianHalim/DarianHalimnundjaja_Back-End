@@ -167,8 +167,8 @@ th,td{
 }
 
 .optionsButtonContainer{
-    padding-bottom: 0px;
-    padding-top: 0px;
+    padding-bottom: 0;
+    padding-top: 3px;
 
 }
 

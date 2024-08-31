@@ -14,9 +14,7 @@ body {
     font-size: 16px;
     padding: 0;
     margin: 0;
-    background-color: #F44336;
-}
-
+    background-color: whitesmoke;
 .container {
     padding: 0;
     margin: 0;
@@ -28,7 +26,8 @@ body {
     justify-content: space-around;
     font-weight: bold;
     font-size: 1.5rem;
-    
+    background-color: white;
+    padding-bottom: 1rem;
 }
 
 .topContainer {
@@ -48,6 +47,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+
 }
 
 form {
@@ -93,8 +93,9 @@ input{
 
 
 .viewContentContainer{
-    background-color: white;
-
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .SearchBarContainer{
@@ -129,68 +130,9 @@ input{
    align-items: center;
 }
 
-.viewTable{
-    text-align: center;
-
-    border-collapse: collapse;
-}
-
-th,td{
-    border-bottom: #000000
-    solid
-    2px;
-
-    padding: 2rem;
-
-
-}
-
-.cartButton{
-    background-color: aqua;
-    width: 100%;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    padding-bottom: 0px;
-    padding-top: 0px;
-}
-
-
-.editButton{
-    background-color: greenyellow;
-    width: 50%;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    padding-bottom: 0px;
-    padding-top: 0px;
-    font-size: 10px;
-}
-
-.deleteButton{
-    background-color: #F44336;
-    width: 50%;
-    margin-bottom: 0px;
-    padding-bottom: 0px;
-    padding-top: 0px;
-    font-size: 10px;
-}
-
-.optionsButtonContainer{
-    padding-bottom: 0px;
-    padding-top: 0px;
-}
-
-.viewButtonContainer{
-    padding-bottom: 3px;
-    padding-top: 3px;
-}
-
-.viewHeader{
-    color: black;
-    text-align: center;
-}
 
 a{
-    color: white;
+    color: black;
     text-decoration: none;
 }
 
@@ -200,8 +142,61 @@ a:hover{
     border-radius: 5px;
 }
 
-.formDelete{
-  width: 100%;
-    
-}
+/* From Uiverse.io by alexruix */ 
+.card {
+    width: 190px;
+    height: 254px;
+    border-radius: 20px;
+    background: black;
+    position: relative;
+    padding: 1.8rem;
+    border: 2px solid white;
+    transition: 0.5s ease-out;
+    overflow: visible;
+   }
+   
+   .card-details {
+    color: white;
+    height: 100%;
+    gap: .5em;
+    display: grid;
+    place-content: center;
+   }
+   
+   .card-button {
+    transform: translate(-50%, 125%);
+    width: 60%;
+    border-radius: 1rem;
+    border: none;
+    background-color: white;
+    color: black;
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    opacity: 0;
+    transition: 0.3s ease-out;
+   }
+   
+   .text-body {
+    color: rgb(134, 134, 134);
+   }
+   
+   /*Text*/
+   .text-title {
 
+    font-size: 0.8rem;
+    font-weight: bold;
+   }
+   
+   /*Hover*/
+   .card:hover {
+    border-color: #008bf8;
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+   }
+   
+   .card:hover .card-button {
+    transform: translate(-50%, 50%);
+    opacity: 1;
+   }}

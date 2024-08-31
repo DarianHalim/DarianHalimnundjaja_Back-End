@@ -54,6 +54,14 @@ class BarangController extends Controller
         return view('viewBarangPage', compact('barang'));
     }
 
+    public function getKatalog()
+    {
+
+        $barang = Barang::all();
+        $categories = Category::with('Barang')->get();
+        return view('userViewBarang', compact('barang'));
+    }
+
     public function getBarangById($id)
     {
         $barang = Barang::find($id);

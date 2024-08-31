@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>View Menu</title>
-    <link rel="stylesheet" href="{{ asset('userStyleSheet.css') }}">
+    <title>Catalog Menu</title>
+    <link rel="stylesheet" href="{{ asset('css/userStyleSheet.css') }}">
+
 </head>
 
 <body>
@@ -15,94 +16,43 @@
 
         <div class="topHeader">
             <div class="navbarContainer">
-                <span><a href="{{ route('getBarang') }}">View</a></span>
+                <span><a href="{{ route('getKatalog') }}">Katalog</a></span>
                 <span><a href="{{ route('home') }}">Leave</a></span>
             </div>
 
         </div>
 
+        <div class="SearchBarContainer">
+            <input type="text" placeholder="Search" class="searchBar">
+            <button class="searchButton">Search</button>
+        </div>
+
         <div class="viewContentContainer">
 
 
-            <div class="welcomeBanner">
-                <h2 class="viewHeader">Daftar Barang</h2>
-            </div>
+            @foreach ($barang as $item)
+                <div class="card">
+                    <div class="card-details">
+                        <p class="text-title">
+                            @if ($item->image)
+                            <img src="{{ asset('storage/images/' . $item->image) }}"
+                                alt="Image for {{ $item->namaBarang }}" style="width: 130px; height: auto;">
+                        @else
+                            No image
+                        @endif
+                        </p>
+                        <p class="text-title">{{ $item->namaBarang }}</p>
+                        <p class="text-title">Harga: {{ $item->hargaBarang }}</p>
+                        <p class="text-title">Jumlah: {{ $item->jumlahBarang }}</p>
+                        <p class="text-title">Kategory:{{ $item->category->name }}</p>
 
-            <div class="SearchBarContainer">
-                <input type="text" placeholder="Search" class="searchBar">
-                <button class="searchButton">Search</button>
-            </div>
+                        
+                    </div>
+                    <button class="card-button">Add To Cart</button>
+                </div>
+            @endforeach
 
-            <div class="tableContainer">
 
-                <thead>
-
-                    <table class="viewTable">
-
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nama Barang</th>
-                            <th scope="col">Harga Barang</th>
-                            <th scope="col">Jumlah Barang</th>
-                            <th scope="col">Kategori</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Options</th>
-                        </tr>
-
-                </thead>
-
-                <tbody>
-
-                    @foreach ($barang as $item)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->namaBarang }}</td>
-                            <td>{{ $item->hargaBarang }}</td>
-                            <td>{{ $item->jumlahBarang }}</td>
-                            <td> {{ $item->category->name }} </td>
-                            <td>
-                                @if ($item->image)
-                                    <img src="{{ asset('storage/images/' . $item->image) }}"
-                                        alt="Image for {{ $item->namaBarang }}" style="width: 100px; height: auto;">
-                                @else
-                                    No image
-                                @endif
-                            </td>
-
-                            <td class="viewButtonContainer">
-
-                                <div>
-                                    <a href="{{ route('editBarang', $item->id) }}">
-                                        <button type="button" class="cartButton">Add To Cart</button>
-                                    </a>
-    
-                                </div>
-
-                                <div class="optionsButtonContainer">
-                                    <form class="formDelete" action="{{ route('deleteBarang', ['id' => $item->id]) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="deleteButton" type="submit">Delete</button>
-                                    </form>
-    
-                                    <a href="{{ route('editBarang', $item->id) }}">
-                                        <button type="button" class="editButton">Edit</button>
-                                    </a>
-       
-                                </div>
-                              
-                            </td>
-
-                        </tr>
-                    @endforeach
-
-                </tbody>
-
-                </table>
-            </div>
 
         </div>
     </div>
