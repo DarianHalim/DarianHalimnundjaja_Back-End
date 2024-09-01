@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=Cart, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/userStyleSheet.css') }}">
     <title>Cart</title>
@@ -26,40 +26,48 @@
 
         <p>Invoice_No: {{ $order->order_number }}</p>
 
-        <form action="{{ route('updateCart') }}" method="POST">
-            @csrf
-            <table>
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Tanggal Pembelian</th>
-                        <th>Nama Barang</th>
-                        <th>Kategori</th>
-                        <th>Jumlah</th>
-                        <th>Harga</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach ($cartItems as $item)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->created_at->format('d/m/Y H:i:s') }}</td>
-                            <td>{{ $item->barang->namaBarang }}</td>
-                            <td>{{ $item->barang->category->name }}</td>
-                            <td>
-                                <input type="number" name="quantity[{{ $item->id }}]"
-                                    value="{{ $item->quantity }}" min="1" class="quantity-input">
-                            </td>
-                            <td>Rp {{ number_format($item->barang->hargaBarang, 2) }}</td>
-                            <td>Rp {{ number_format($item->barang->hargaBarang * $item->quantity, 2) }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            <button type="submit" class="updateCartBTN">Update All Quantities</button>
-        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Tanggal Pembelian</th>
+                    <th>Nama Barang</th>
+                    <th>Kategori</th>
+                    <th>Jumlah</th>
+                    <th>Harga</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($cartItems as $itemC)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $itemC->created_at->format('d/m/Y H:i:s') }}</td>
+                    <td>{{ $itemC->barang->namaBarang }}</td>
+                    <td>{{ $itemC->barang->category->name }}</td>
+                    <td>
+                        <!-- Form for updating quantity -->
+                        <form action="{{ route('updateCart') }}" method="POST">
+                            @csrf
+                            <input type="number" name="quantity[{{ $itemC->id }}]" value="{{ $itemC->quantity }}" min="1" class="quantity-input" max="{{ $itemC->barang->jumlahBarang }}">
+                            <button type="submit">Update</button>
+                        </form>
+                    </td>
+                    <td>Rp {{ number_format($itemC->barang->hargaBarang, 2) }}</td>
+                    <td>Rp {{ number_format($itemC->barang->hargaBarang * $itemC->quantity, 2) }}</td>
+                    <td>
+                        <!-- Form for deleting item -->
+                        <form action="{{ route('removeFromCart', ['id' => $itemC->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+            
+            </tbody>
+        </table>
 
 
         <div class="addressnzipContainer">
@@ -91,8 +99,11 @@
                     <input type="checkbox" id="" name="" value="" required>
                     <p class="checkboxText">Semua Data Sudah Diisi Dengan Benar?</p>
                 </div>
+
             </form>
         </div>
+
+
 
         <tfoot>
             <tr>
@@ -125,6 +136,9 @@
             </div>
         </div>
     </div>
+    </div>
+
+
 </body>
 
 </html>

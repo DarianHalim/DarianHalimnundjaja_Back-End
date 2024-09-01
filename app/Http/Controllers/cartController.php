@@ -68,6 +68,7 @@ class cartController extends Controller
         return redirect()->back()->with('success', 'Cart updated successfully!');
     }
     
+    
     public function removeFromCart($id)
     {
         $userId = Auth::id();
@@ -77,7 +78,7 @@ class cartController extends Controller
     
         return redirect()->back()->with('success', 'Item removed from cart!');
     }
-
+    
     //ORDER
 
     public function store(Request $request)
