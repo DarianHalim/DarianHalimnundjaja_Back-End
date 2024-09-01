@@ -76,39 +76,34 @@
         </form>
 
         <div class="addressnzipContainer">
-            <table>
-                <form action="{{ route('orderUpdate') }}" method="POST">
-                    @csrf
+            <form action="{{ route('orderUpdate') }}" method="POST">
+                @csrf
+                <h2>Order Number: {{ $order->order_number }}</h2>
+                <input type="hidden" name="order_id" value="{{ $order->id }}">
+                <table>
                     <tr>
-                        <th>
-                            Address
-                        </th>
-        
-                        <th>
-                            Zip
-                        </th>
+                        <th>Address</th>
+                        <th>Zip</th>
                     </tr>
-        
                     <tr>
                         <td>
                             <input type="text" id="address" name="alamat_pengiriman"
                                 value="{{ old('alamat_pengiriman', $order->alamat_pengiriman ?? 'insert address') }}"
                                 class="form-control">
                         </td>
-        
                         <td>
                             <input type="text" id="zipcode" name="kode_pos"
                                 value="{{ old('kode_pos', $order->kode_pos ?? '11111') }}"
                                 class="form-control">
                         </td>
-                        
                         <td>
                             <button type="submit">Update</button>
                         </td>
                     </tr>
-                </form>
-            </table>
+                </table>
+            </form>
         </div>
+        
 
         
         <tfoot>

@@ -43,7 +43,7 @@ Route::post('/cart/update', [CartController::class, 'updateCart'])->name('update
 
 Route::delete('/cart/remove/{cartId}', [cartController::class, 'removeFromCart'])->name('removeFromCart');
 
-
+Route::get('/order/{order_number}', [cartController::class, 'show'])->name('order.show');
 Route::post('/order/update', [cartController::class, 'update'])->name('orderUpdate');
 
 

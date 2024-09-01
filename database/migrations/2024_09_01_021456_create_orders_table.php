@@ -12,15 +12,19 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // 1 user can have many orders
-            $table->string('alamat_pengiriman')->default('insert address');
-            $table->string('kode_pos')->default('11111');
-            $table->timestamps();
-        });
-    }
+{
+    Schema::create('orders', function (Blueprint $table) {
+        $table->id();
+        $table->string('order_number')->unique();
+        $table->unsignedBigInteger('user_id');
+        $table->string('alamat_pengiriman')->default('insert address'); // Default value
+        $table->string('kode_pos')->default('11111'); // Default value
+        $table->timestamps();
+    
+        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+    });
+}
+
 
     /**
      * Reverse the migrations.

@@ -20,10 +20,7 @@ class cart extends Model
         return $this->belongsTo(Barang::class, 'barang_id');
     }
 
-    public function invoice()
-    {
-        return $this->hasOne(Invoice::class);
-    }
+   
 
     public function order()
     {
