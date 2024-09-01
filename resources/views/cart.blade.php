@@ -72,7 +72,7 @@
 
         <div class="addressnzipContainer">
             <!-- Form to update existing order -->
-            <form action="{{ route('createNewOrder') }}" method="POST">
+            <form action="{{ route('orderUpdate') }}" method="POST">
                 @csrf
                 <input type="hidden" name="order_id" value="{{ $order->id }}">
                 <table>
@@ -82,22 +82,18 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" name="alamat_pengiriman" id="alamat_pengiriman" required>
+                            <input type="text" name="alamat_pengiriman" value="{{ $order->alamat_pengiriman }}" required>
                         </td>
                         <td>
-                            <input type="number" name="kode_pos" id="kode_pos" required>
+                            <input type="number" name="kode_pos" value="{{ $order->kode_pos }}" required>
                         </td>
                         <td>
-                            <button type="submit">Create</button>
+                            <button type="submit">Update</button>
                         </td>
                     </tr>
                 </table>
-
-                <div class="checkContainer">
-                    <input type="checkbox" id="" name="" value="" required>
-                    <p class="checkboxText">Semua Data Sudah Diisi Dengan Benar?</p>
-                </div>
             </form>
+            
 
 
         </div>

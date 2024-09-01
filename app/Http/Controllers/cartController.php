@@ -17,13 +17,13 @@ class cartController extends Controller
         $cartItems = Cart::where('user_id', $userId)
             ->with('barang')
             ->get();
-    
+
         $totalPrice = $cartItems->sum(function ($item) {
             return $item->barang->hargaBarang * $item->quantity;
         });
-    
+
         //Ambil user order ini atau create baru dengan value default
-   
+
         $order = Order::where('user_id', $userId)->first();
         if (!$order) {
             $order = new Order();
@@ -32,15 +32,15 @@ class cartController extends Controller
             $order->kode_pos = '11111'; // Default value
             $order->save();
         }
-    
+
         return view('cart', [
             'cartItems' => $cartItems,
             'totalPrice' => $totalPrice,
             'order' => $order
         ]);
-    }   
+    }
 
-    
+
 
     public function addToCart(Request $request)
     {
@@ -55,33 +55,33 @@ class cartController extends Controller
 
     public function updateCart(Request $request)
     {
-        $userId = Auth::id();   
-    
+        $userId = Auth::id();
+
         foreach ($request->input('quantity') as $cartId => $quantity) {
             $cart = Cart::where('user_id', $userId)
-                        ->where('id', $cartId)
-                        ->first();
-    
+                ->where('id', $cartId)
+                ->first();
+
             if ($cart) {
                 $cart->quantity = $quantity;
                 $cart->save();
             }
         }
-    
+
         return redirect()->back()->with('success', 'Cart updated successfully!');
     }
-    
-    
+
+
     public function removeFromCart($id)
     {
         $userId = Auth::id();
         Cart::where('user_id', $userId)
             ->where('id', $id)
             ->delete();
-    
+
         return redirect()->back()->with('success', 'Item removed from cart!');
     }
-    
+
     //ORDER CONTROLLERS
 
     public function store(Request $request)
@@ -93,11 +93,10 @@ class cartController extends Controller
 
         $order = new Order();
         $order->user_id = Auth::id();
-        $order->alamat_pengiriman = $request->input('alamat_pengiriman', 'insert address');
-        $order->kode_pos = $request->input('kode_pos', '11111');
-        $order->save(); // Custom order number di set saat ini serta default value lain agar ndak error
+        $order->alamat_pengiriman = $request->input('alamat_pengiriman');
+        $order->kode_pos = $request->input('kode_pos');
+        $order->save();
 
-        // Hubungkan car dengna order
         $cartItems = Cart::where('user_id', Auth::id())->get();
         foreach ($cartItems as $cart) {
             $cart->order_id = $order->id;
@@ -121,46 +120,37 @@ class cartController extends Controller
             'alamat_pengiriman' => 'required|string|min:10|max:100',
             'kode_pos' => 'required|string|size:5',
         ]);
-    
-        //Cari order based on idnya
+
         $order = Order::find($request->input('order_id'));
-    
-        // Update isi order
-        $order->alamat_pengiriman = $request->input('alamat_pengiriman');
-        $order->kode_pos = $request->input('kode_pos');
-        $order->save();
-    
+
+        if ($order) {
+            $order->alamat_pengiriman = $request->input('alamat_pengiriman');
+            $order->kode_pos = $request->input('kode_pos');
+            $order->save();
+        }
+
         return redirect()->route('getCart')->with('success', 'Order updated successfully!');
     }
 
 
     public function createNewOrder(Request $request)
-{
-    $request->validate([
-        'alamat_pengiriman' => 'required|string|min:10|max:100',
-        'kode_pos' => 'required|string|size:5',
-    ]);
+    {
+        $request->validate([
+            'alamat_pengiriman' => 'required|string|min:10|max:100',
+            'kode_pos' => 'required|string|size:5',
+        ]);
 
-    $userId = Auth::id();
+        $userId = Auth::id();
 
-    // Buat order baru
-    $order = new Order();
-    $order->user_id = $userId;
-    $order->alamat_pengiriman = $request->input('alamat_pengiriman');
-    $order->kode_pos = $request->input('kode_pos');
-    $order->save();
+        $order = new Order();
+        $order->user_id = $userId;
+        $order->alamat_pengiriman = $request->input('alamat_pengiriman');
+        $order->kode_pos = $request->input('kode_pos');
+        $order->save();
 
-    // Hubungkan relasi order dan pengguna
-    $cartItems = Cart::where('user_id', $userId)->get();
-    foreach ($cartItems as $cart) {
-        $cart->order_id = $order->id;
-        $cart->save();
+        // Update carts with the new order_id
+        Cart::where('user_id', $userId)->update(['order_id' => $order->id]);
+
+        return redirect()->route('getCart')->with('success', 'New order created successfully!');
     }
-
-    // 
-    return redirect()->route('getCart')->with('success', 'New order created successfully!');
-}
-
-    
-    
 }
