@@ -46,14 +46,14 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->created_at->format('d/m/Y H:i:s') }}</td>
                             <td>{{ $item->barang->namaBarang }}</td>
-                            <td>{{ $item->barang->category->name }}</td>
+                            
                             <td>
                                 <input type="number" name="quantity[{{ $item->id }}]"
-                                    value="{{ $item->quantity }}" min="1" class="quantity-input">
+                                    value="{{ $item->quantity }}"  min="1" class="quantity-input" max="{{ $item->barang->jumlahBarang }}">
                             </td>
                             <td>Rp {{ number_format($item->barang->hargaBarang, 2) }}</td>
                             <td>Rp {{ number_format($item->barang->hargaBarang * $item->quantity, 2) }}</td>
-
+                         
                             <td>
                                 <form action="{{ route('removeFromCart', $item->id) }}" method="POST">
                                     @csrf
