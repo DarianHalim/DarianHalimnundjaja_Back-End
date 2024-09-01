@@ -35,7 +35,7 @@
                             @endif
                         </p>
                         <p class="text-title">{{ $item->namaBarang }}</p>
-                        <p class="text-title">Harga: {{ number_format($item->hargaBarang, 2) }}</p>
+                        <p class="text-title">Harga: Rp.{{ number_format($item->hargaBarang, 2) }}</p>
                         <p class="text-title">Jumlah Barang: {{ $item->jumlahBarang }}</p>
                         <p class="text-title">Kategori: {{ $item->category->name }}</p>
                     </div>

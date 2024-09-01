@@ -12,7 +12,7 @@
 <body>
 
     <div class="containerDiv">
-        <div class="topHeader">
+        <div class="topHeader"> 
             <div class="navbarContainer">
                 <span><a href="{{ route('getKatalog') }}">Katalog</a></span>
                 <span>Faktur for {{ Auth::user()->name }}</span>
@@ -118,10 +118,8 @@
     </div>
 
     <button type="submit">Update</button>
+    
 </form>
-
-
-
         </div>
 
         <div class="cartContainer">
@@ -145,6 +143,9 @@
                 </div>
             </div>
         </div>
+
+        <button class="print-button no-print" onclick="window.print()">Print Page</button
+
 
 </body>
 
