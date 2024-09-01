@@ -39,7 +39,6 @@
             </thead>
             <tbody>
                 @foreach ($cartItems as $itemC)
-                
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $itemC->created_at->format('d/m/Y H:i:s') }}</td>
@@ -73,7 +72,7 @@
 
         <div class="addressnzipContainer">
             <!-- Form to update existing order -->
-            <form action="{{ route('orderUpdate') }}" method="POST">
+            <form action="{{ route('createNewOrder') }}" method="POST">
                 @csrf
                 <input type="hidden" name="order_id" value="{{ $order->id }}">
                 <table>
@@ -83,65 +82,47 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" id="address" name="alamat_pengiriman"
-                                value="{{ old('alamat_pengiriman', $order->alamat_pengiriman ?? 'insert address') }}"
-                                class="form-control">
+                            <input type="text" name="alamat_pengiriman" id="alamat_pengiriman" required>
                         </td>
                         <td>
-                            <input type="text" id="zipcode" name="kode_pos"
-                                value="{{ old('kode_pos', $order->kode_pos ?? '11111') }}" class="form-control">
+                            <input type="number" name="kode_pos" id="kode_pos" required>
                         </td>
                         <td>
-                            <button type="submit">Update</button>
+                            <button type="submit">Create</button>
                         </td>
                     </tr>
                 </table>
-            
+
                 <div class="checkContainer">
                     <input type="checkbox" id="" name="" value="" required>
                     <p class="checkboxText">Semua Data Sudah Diisi Dengan Benar?</p>
                 </div>
             </form>
 
-            <!-- Form to create a new order -->
-            <form action="{{ route('createNewOrder') }}" method="POST">
-                @csrf
-                <input type="hidden" name="alamat_pengiriman" value="insert address">
-                <input type="hidden" name="kode_pos" value="11111">
-                <button type="submit">Create New Order</button>
-            </form>
 
         </div>
 
-        <tfoot>
-            <tr>
-                <td colspan="7" style="text-align: right; font-weight: bold;">Total Harga:</td>
-                <td>Rp {{ number_format($totalPrice, 2) }}</td>
-            </tr>
-        </tfoot>
-    </div>
-
-    <div class="cartContainer">
-        <div class="checkoutContainer">
-            <div class="left-side">
-                <div class="card">
-                    <div class="card-line"></div>
-                    <div class="buttons"></div>
-                </div>
-                <div class="post">
-                    <div class="post-line"></div>
-                    <div class="screen">
-                        <div class="dollar">{{ number_format($totalPrice, 2) }}</div>
+        <div class="cartContainer">
+            <div class="checkoutContainer">
+                <div class="left-side">
+                    <div class="card">
+                        <div class="card-line"></div>
+                        <div class="buttons"></div>
                     </div>
-                    <div class="numbers"></div>
-                    <div class="numbers-line2"></div>
+                    <div class="post">
+                        <div class="post-line"></div>
+                        <div class="screen">
+                            <div class="dollar">{{ number_format($totalPrice, 2) }}</div>
+                        </div>
+                        <div class="numbers"></div>
+                        <div class="numbers-line2"></div>
+                    </div>
+                </div>
+                <div class="right-side">
+                    <div class="new">Rp {{ number_format($totalPrice, 2) }}</div>
                 </div>
             </div>
-            <div class="right-side">
-                <div class="new">Save</div>
-            </div>
         </div>
-    </div>
 
 </body>
 

@@ -113,7 +113,7 @@ class cartController extends Controller
         return view('order.show', compact('order'));
     }
 
-    public function update(Request $request)
+    public function orderUpdate(Request $request)
     {
         $request->validate([
             'order_id' => 'required|exists:orders,id',
@@ -121,24 +121,13 @@ class cartController extends Controller
             'kode_pos' => 'required|string|size:5',
         ]);
     
-        // Retrieve the existing order to update
+        // Find the order by ID
         $order = Order::find($request->input('order_id'));
     
-        if (!$order) {
-            return redirect()->route('getCart')->with('error', 'Order not found.');
-        }
-    
-        // Update the order with new details
+        // Update the order's address and zip code
         $order->alamat_pengiriman = $request->input('alamat_pengiriman');
         $order->kode_pos = $request->input('kode_pos');
-        $order->save(); // Save the updated order
-    
-        // Associate carts with this updated order
-        $cartItems = Cart::where('user_id', Auth::id())->get();
-        foreach ($cartItems as $cart) {
-            $cart->order_id = $order->id;
-            $cart->save();
-        }
+        $order->save();
     
         return redirect()->route('getCart')->with('success', 'Order updated successfully!');
     }

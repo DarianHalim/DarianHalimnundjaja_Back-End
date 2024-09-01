@@ -17,8 +17,8 @@ return new class extends Migration
         $table->id();
         $table->string('order_number')->unique();
         $table->unsignedBigInteger('user_id');
-        $table->string('alamat_pengiriman')->default('insert address'); // Default value
-        $table->string('kode_pos')->default('11111'); // Default value
+        $table->string('alamat_pengiriman'); 
+        $table->string('kode_pos'); 
         $table->timestamps();
     
         $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
