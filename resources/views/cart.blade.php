@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=Cart, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/userStyleSheet.css') }}">
     <title>Cart</title>
@@ -40,40 +40,27 @@
                         <th>Subtotal</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     @foreach ($cartItems as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->created_at->format('d/m/Y H:i:s') }}</td>
                             <td>{{ $item->barang->namaBarang }}</td>
-                            
+                            <td>{{ $item->barang->category->name }}</td>
                             <td>
                                 <input type="number" name="quantity[{{ $item->id }}]"
-                                    value="{{ $item->quantity }}"  min="1" class="quantity-input" max="{{ $item->barang->jumlahBarang }}">
+                                    value="{{ $item->quantity }}" min="1" class="quantity-input">
                             </td>
                             <td>Rp {{ number_format($item->barang->hargaBarang, 2) }}</td>
                             <td>Rp {{ number_format($item->barang->hargaBarang * $item->quantity, 2) }}</td>
-                         
-                            <td>
-                                <form action="{{ route('removeFromCart', $item->id) }}" method="POST">
-                                    @csrf
-                                    <button class="updateCartBTN" type="submit" class="update-button">Update</button>
-                                </form>
-                            </td>
-
-                            <td>
-                                <form action="{{ route('removeFromCart', $item->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="removeCartBTN" type="submit" class="remove-button">Remove</button>
-                                </form>
-
-                            </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            <button type="submit" class="updateCartBTN">Update All Quantities</button>
         </form>
+
 
         <div class="addressnzipContainer">
             <form action="{{ route('orderUpdate') }}" method="POST">
@@ -85,15 +72,14 @@
                         <th>Zip</th>
                     </tr>
                     <tr>
-                        <td>    
+                        <td>
                             <input type="text" id="address" name="alamat_pengiriman"
                                 value="{{ old('alamat_pengiriman', $order->alamat_pengiriman ?? 'insert address') }}"
                                 class="form-control">
                         </td>
                         <td>
                             <input type="text" id="zipcode" name="kode_pos"
-                                value="{{ old('kode_pos', $order->kode_pos ?? '11111') }}"
-                                class="form-control">
+                                value="{{ old('kode_pos', $order->kode_pos ?? '11111') }}" class="form-control">
                         </td>
                         <td>
                             <button type="submit">Update</button>
@@ -105,12 +91,9 @@
                     <input type="checkbox" id="" name="" value="" required>
                     <p class="checkboxText">Semua Data Sudah Diisi Dengan Benar?</p>
                 </div>
-               
             </form>
         </div>
-        
 
-        
         <tfoot>
             <tr>
                 <td colspan="7" style="text-align: right; font-weight: bold;">Total Harga:</td>
@@ -120,9 +103,9 @@
     </div>
 
     <div class="cartContainer">
-  
+
         <div class="checkoutContainer">
-            
+
             <div class="left-side">
                 <div class="card">
                     <div class="card-line"></div>
@@ -142,9 +125,6 @@
             </div>
         </div>
     </div>
-    </div>
-
-    
 </body>
 
 </html>

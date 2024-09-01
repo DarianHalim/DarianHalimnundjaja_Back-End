@@ -38,10 +38,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart',[cartController::class,'getCart'])->name('getCart');
     //add to cart
     Route::post('/cart/add', [cartController::class, 'addToCart'])->name('cartAdd');
-    // Route for updating the cart
+    
+// Route for updating cart quantities
 Route::post('/cart/update', [CartController::class, 'updateCart'])->name('updateCart');
 
-Route::delete('/cart/remove/{cartId}', [cartController::class, 'removeFromCart'])->name('removeFromCart');
+// Route for removing items from the cart
+Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
 
 Route::get('/order/{order_number}', [cartController::class, 'show'])->name('order.show');
 Route::post('/order/update', [cartController::class, 'update'])->name('orderUpdate');
