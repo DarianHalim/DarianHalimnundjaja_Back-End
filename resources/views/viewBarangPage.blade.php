@@ -13,13 +13,16 @@
 
     <div class="containerDiv">
 
-        <div class="topHeader">
-            <div class="navbarContainer">
-                <span><a href="{{ route('getBarang') }}">View</a></span>
-                <span><a href="{{ route('home') }}">Leave</a></span>
-            </div>
-
-        </div>
+        <div class="container">
+            <div class="topContainer">
+                <div class="navbarContainer">
+                    <div class="navbarContainer">
+                        <span><a href="{{ route('getBarang') }}">View</a></span>
+                        <span><a href="{{ route('getCreatePage') }}">Create</a></span>
+                        <span><a href="{{ route('home') }}">Leave</a></span>
+                    </div>
+                </div>
+    
 
         <div class="viewContentContainer">
 
