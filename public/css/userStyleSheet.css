@@ -525,3 +525,13 @@ tr:hover {
     flex-direction: column;
 }
 
+.checkboxText{
+    font-size: 7px;
+
+}
+
+
+.checkContainer{
+    display: flex;
+    flex-direction: row;
+}

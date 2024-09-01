@@ -100,6 +100,12 @@
                         </td>
                     </tr>
                 </table>
+
+                <div class="checkContainer">
+                    <input type="checkbox" id="" name="" value="" required>
+                    <p class="checkboxText">Semua Data Sudah Diisi Dengan Benar?</p>
+                </div>
+               
             </form>
         </div>
         
@@ -114,7 +120,6 @@
     </div>
 
     <div class="cartContainer">
-
   
         <div class="checkoutContainer">
             
@@ -138,6 +143,8 @@
         </div>
     </div>
     </div>
+
+    
 </body>
 
 </html>
