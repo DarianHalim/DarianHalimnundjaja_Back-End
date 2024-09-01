@@ -75,6 +75,37 @@
             </table>
         </form>
 
+        <div class="addressnzipContainer">
+            <table>
+                <tr>
+                    <form action="">
+                        <th>
+                            Address
+                        </th>
+
+                        <th>
+                            Zip
+                        </th>
+                    </form>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Insert Address
+                    </td>
+                    
+                    <td>
+                        Insert ZIP Code
+                    </td>
+                    
+                    <td>
+                        <button type="submit">Update</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
         <tfoot>
             <tr>
                 <td colspan="7" style="text-align: right; font-weight: bold;">Total Harga:</td>
@@ -85,10 +116,9 @@
 
     <div class="cartContainer">
 
-
-    
-
+  
         <div class="checkoutContainer">
+            
             <div class="left-side">
                 <div class="card">
                     <div class="card-line"></div>
