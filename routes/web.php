@@ -4,6 +4,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\cartController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArchiveCartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,11 @@ Route::get('/order/{order_number}', [cartController::class, 'show'])->name('orde
 Route::post('/order/update', [cartController::class, 'update'])->name('orderUpdate');
 
 
+
+Route::post('/order/create', [cartController::class, 'createNewOrder'])->name('createNewOrder');
+
+
+Route::resource('archiveCart', ArchiveCartController::class);
 });
 
 require __DIR__ . '/auth.php';
@@ -93,4 +99,4 @@ Route::get('/viewBarangPage', [BarangController::class, 'getBarang'])->name('get
 
     // Route for deleting an item
     Route::delete('/delete-barang/{id}', [BarangController::class, 'deleteBarang'])->name('deleteBarang');
-});
+}); 

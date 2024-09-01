@@ -17,11 +17,11 @@ class cartController extends Controller
         $cartItems = Cart::where('user_id', $userId)
             ->with('barang')
             ->get();
-
+    
         $totalPrice = $cartItems->sum(function ($item) {
             return $item->barang->hargaBarang * $item->quantity;
         });
-
+    
         // Retrieve the current order for the user, or create a new one with default values
         $order = Order::where('user_id', $userId)->first();
         if (!$order) {
@@ -31,13 +31,15 @@ class cartController extends Controller
             $order->kode_pos = '11111'; // Default value
             $order->save();
         }
-
+    
         return view('cart', [
             'cartItems' => $cartItems,
             'totalPrice' => $totalPrice,
             'order' => $order
         ]);
-    }
+    }   
+
+    
 
     public function addToCart(Request $request)
     {
@@ -92,7 +94,7 @@ class cartController extends Controller
         $order->user_id = Auth::id();
         $order->alamat_pengiriman = $request->input('alamat_pengiriman', 'insert address');
         $order->kode_pos = $request->input('kode_pos', '11111');
-        $order->save(); // At this point, the custom `order_number` is generated
+        $order->save(); // At this point, the custom order_number is generated
 
         // Associate carts with this order
         $cartItems = Cart::where('user_id', Auth::id())->get();
@@ -113,25 +115,62 @@ class cartController extends Controller
 
     public function update(Request $request)
     {
-        // Validate the input
         $request->validate([
             'order_id' => 'required|exists:orders,id',
             'alamat_pengiriman' => 'required|string|min:10|max:100',
             'kode_pos' => 'required|string|size:5',
         ]);
-
-        // Find the order by ID
+    
+        // Retrieve the existing order to update
         $order = Order::find($request->input('order_id'));
-
-        if ($order) {
-            // Update the order details
-            $order->alamat_pengiriman = $request->input('alamat_pengiriman');
-            $order->kode_pos = $request->input('kode_pos');
-            $order->save();
-
-            return redirect()->back()->with('success', 'Order updated successfully!');
-        } else {
-            return redirect()->back()->with('error', 'Order not found!');
+    
+        if (!$order) {
+            return redirect()->route('getCart')->with('error', 'Order not found.');
         }
+    
+        // Update the order with new details
+        $order->alamat_pengiriman = $request->input('alamat_pengiriman');
+        $order->kode_pos = $request->input('kode_pos');
+        $order->save(); // Save the updated order
+    
+        // Associate carts with this updated order
+        $cartItems = Cart::where('user_id', Auth::id())->get();
+        foreach ($cartItems as $cart) {
+            $cart->order_id = $order->id;
+            $cart->save();
+        }
+    
+        return redirect()->route('getCart')->with('success', 'Order updated successfully!');
     }
+
+
+    public function createNewOrder(Request $request)
+{
+    $request->validate([
+        'alamat_pengiriman' => 'required|string|min:10|max:100',
+        'kode_pos' => 'required|string|size:5',
+    ]);
+
+    $userId = Auth::id();
+
+    // Create a new order
+    $order = new Order();
+    $order->user_id = $userId;
+    $order->alamat_pengiriman = $request->input('alamat_pengiriman');
+    $order->kode_pos = $request->input('kode_pos');
+    $order->save();
+
+    // Associate carts with this new order
+    $cartItems = Cart::where('user_id', $userId)->get();
+    foreach ($cartItems as $cart) {
+        $cart->order_id = $order->id;
+        $cart->save();
+    }
+
+    // Redirect to cart page with the new order
+    return redirect()->route('getCart')->with('success', 'New order created successfully!');
+}
+
+    
+    
 }
