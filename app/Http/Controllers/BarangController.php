@@ -18,7 +18,7 @@ class BarangController extends Controller
     public function createBarang(Request $request)
     {
         $request->validate([
-            'namaBarang' => 'required|string|max:255',
+            'namaBarang' => 'required|string|min:5|max:80',
             'hargaBarang' => 'required|integer',
             'jumlahBarang' => 'required|integer',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Image validation
@@ -70,7 +70,7 @@ class BarangController extends Controller
     public function updateBarang(Request $request, $id)
     {
         $request->validate([
-            'namaBarang' => 'required|string|max:255',
+            'namaBarang' => 'required|string|min:5|max:80',
             'hargaBarang' => 'required|integer',
             'jumlahBarang' => 'required|integer',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // validasi for image

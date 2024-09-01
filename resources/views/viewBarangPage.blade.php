@@ -31,10 +31,7 @@
                 <h2 class="viewHeader">Daftar Barang</h2>
             </div>
 
-            <div class="SearchBarContainer">
-                <input type="text" placeholder="Search" class="searchBar">
-                <button class="searchButton">Search</button>
-            </div>
+     
 
             <div class="tableContainer">
 
@@ -62,7 +59,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->namaBarang }}</td>
-                            <td>{{ $item->hargaBarang }}</td>
+                            <td>Rp. {{ number_format($item->hargaBarang, 0, ',', '.') }}</td>
                             <td>{{ $item->jumlahBarang }}</td>
                             <td> {{ $item->category->name }} </td>
                             <td>

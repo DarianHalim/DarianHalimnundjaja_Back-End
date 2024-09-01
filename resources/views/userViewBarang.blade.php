@@ -20,10 +20,6 @@
             </div>
         </div>
 
-        <div class="SearchBarContainer">
-            <input type="text" placeholder="Search" class="searchBar">
-            <button class="searchButton">Search</button>
-        </div>
 
         <div class="viewContentContainer">
 

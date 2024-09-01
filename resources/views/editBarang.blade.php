@@ -31,7 +31,10 @@
 
                 <div class="inputContainer">
                     <label for="namaBarang">Nama Barang</label>
-                    <input type="text" name="namaBarang" id="namaBarang" value="{{ $barang->namaBarang }}" required>
+                    <input type="text" name="namaBarang" id="namaBarang" value="{{ old('namaBarang', $barang->namaBarang) }}" required>
+                    @if ($errors->has('namaBarang'))
+                        <span class="error-text">{{ $errors->first('namaBarang') }}</span>
+                    @endif
                 </div>
 
                 <div class="inputContainer">
