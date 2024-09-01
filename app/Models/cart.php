@@ -24,4 +24,9 @@ class cart extends Model
     {
         return $this->hasOne(Invoice::class);
     }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }
