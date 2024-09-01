@@ -52,7 +52,7 @@ class cartController extends Controller
 
     public function updateCart(Request $request)
     {
-        $userId = Auth::id();
+        $userId = Auth::id();   
     
         foreach ($request->input('quantity') as $cartId => $quantity) {
             $cart = Cart::where('user_id', $userId)
