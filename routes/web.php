@@ -52,7 +52,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/order/{order_number}', [cartController::class, 'show'])->name('order.show');
 
-    Route::post('/order/update', [cartController::class, 'orderUpdate'])->name('orderUpdate');
+    Route::put('/order/update', [cartController::class, 'orderUpdate'])->name('orderUpdate');
+
 
     Route::post('/order/create', [cartController::class, 'createNewOrder'])->name('createNewOrder');
 });

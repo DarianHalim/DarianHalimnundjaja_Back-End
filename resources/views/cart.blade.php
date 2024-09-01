@@ -71,29 +71,55 @@
         </table>
 
         <div class="addressnzipContainer">
-            <!-- Form to update existing order -->
-            <form action="{{ route('orderUpdate') }}" method="POST">
-                @csrf
-                <input type="hidden" name="order_id" value="{{ $order->id }}">
-                <table>
-                    <tr>
-                        <th>Address</th>
-                        <th>Zip</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="text" name="alamat_pengiriman" value="{{ $order->alamat_pengiriman }}" required>
-                        </td>
-                        <td>
-                            <input type="number" name="kode_pos" value="{{ $order->kode_pos }}" required>
-                        </td>
-                        <td>
-                            <button type="submit">Update</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-            
+           @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<!-- Display validation errors -->
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<!-- Your form -->
+<form action="{{ route('orderUpdate') }}" method="POST">
+    @csrf
+    @method('PUT')
+
+    <input type="hidden" name="order_id" value="{{ $order->id }}">
+
+    <div>
+        <label for="alamat_pengiriman">Alamat Pengiriman</label>
+        <input type="text" name="alamat_pengiriman" id="alamat_pengiriman" value="{{ old('alamat_pengiriman', $order->alamat_pengiriman) }}" required>
+        <!-- Error message for address input -->
+        @error('alamat_pengiriman')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div>
+        <label for="kode_pos">Kode Pos</label>
+        <input type="number" name="kode_pos" id="kode_pos" value="{{ old('kode_pos', $order->kode_pos) }}" required>
+        <!-- Error message for postal code input -->
+        @error('kode_pos')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <button type="submit">Update</button>
+</form>
+
 
 
         </div>

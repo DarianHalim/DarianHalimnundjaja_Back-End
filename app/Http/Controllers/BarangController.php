@@ -22,7 +22,7 @@ class BarangController extends Controller
             'hargaBarang' => 'required|integer',
             'jumlahBarang' => 'required|integer',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Image validation
-            'category_id' => 'required|exists:categories,id', // Validate category_id
+            'category_id' => 'required|exists:categories,id', // Validate untuk category_id
         ]);
 
         // Upload image
@@ -30,7 +30,7 @@ class BarangController extends Controller
             $image = $request->file('image');
             $extension = $image->getClientOriginalExtension();
             $fileName = $request->namaBarang . '_' . time() . '.' . $extension; // Name image for DB
-            $image->storeAs('public/images', $fileName); // Store image
+            $image->storeAs('public/images', $fileName); // simpen image
         } else {
             $fileName = null; // No image
         }
@@ -49,7 +49,7 @@ class BarangController extends Controller
     public function getBarang()
     {
         $barang = Barang::all();
-        $categories = Category::all(); // Fetch categories for other views
+        $categories = Category::all(); // ambil categories for other views
         return view('viewBarangPage', compact('barang', 'categories'));
     }
 
@@ -73,7 +73,7 @@ class BarangController extends Controller
             'namaBarang' => 'required|string|max:255',
             'hargaBarang' => 'required|integer',
             'jumlahBarang' => 'required|integer',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Validation for image
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // validasi for image
             'category_id' => 'required|exists:categories,id', 
         ]);
 
@@ -88,7 +88,7 @@ class BarangController extends Controller
 
             $image = $request->file('image');
             $extension = $image->getClientOriginalExtension();
-            $fileName = $request->namaBarang . '_' . time() . '.' . $extension; // Rename image file
+            $fileName = $request->namaBarang . '_' . time() . '.' . $extension; // nama ulang image file
             $image->storeAs('public/images', $fileName); // Save image
         } else {
             // Keep old image if no new image is uploaded
@@ -110,12 +110,12 @@ class BarangController extends Controller
     {
         $barang = Barang::find($id);
 
-        // Delete the image if it exists
+        // Hapus image kl exist
         if ($barang->image) {
             Storage::disk('public')->delete('images/' . $barang->image);
         }
 
-        $barang->delete(); // Delete the record from the database
+        $barang->delete(); // Hapus dari DB
 
         return redirect(route('getBarang'))->with('success', 'Barang Berhasil Dihapus!');
     }

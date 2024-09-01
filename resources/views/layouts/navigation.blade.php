@@ -12,7 +12,7 @@
 
                     <h1 style="font-size: 1.5rem; align-self: center"><a href="{{ route('getKatalog') }}">Katalog</a></h1>
 
-                    <span style="font-size: 1.5rem; align-self: center;"><a href="{{ route('home') }}">Cart</a></span>
+                    <span style="font-size: 1.5rem; align-self: center;"><a href="{{ route('getCart') }}">Cart</a></span>
 
 
                   
