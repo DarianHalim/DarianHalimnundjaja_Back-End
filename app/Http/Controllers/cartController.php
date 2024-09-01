@@ -22,7 +22,8 @@ class cartController extends Controller
             return $item->barang->hargaBarang * $item->quantity;
         });
     
-        // Retrieve the current order for the user, or create a new one with default values
+        //Ambil user order ini atau create baru dengan value default
+   
         $order = Order::where('user_id', $userId)->first();
         if (!$order) {
             $order = new Order();
@@ -81,7 +82,7 @@ class cartController extends Controller
         return redirect()->back()->with('success', 'Item removed from cart!');
     }
     
-    //ORDER
+    //ORDER CONTROLLERS
 
     public function store(Request $request)
     {
@@ -94,9 +95,9 @@ class cartController extends Controller
         $order->user_id = Auth::id();
         $order->alamat_pengiriman = $request->input('alamat_pengiriman', 'insert address');
         $order->kode_pos = $request->input('kode_pos', '11111');
-        $order->save(); // At this point, the custom order_number is generated
+        $order->save(); // Custom order number di set saat ini serta default value lain agar ndak error
 
-        // Associate carts with this order
+        // Hubungkan car dengna order
         $cartItems = Cart::where('user_id', Auth::id())->get();
         foreach ($cartItems as $cart) {
             $cart->order_id = $order->id;
@@ -121,10 +122,10 @@ class cartController extends Controller
             'kode_pos' => 'required|string|size:5',
         ]);
     
-        // Find the order by ID
+        //Cari order based on idnya
         $order = Order::find($request->input('order_id'));
     
-        // Update the order's address and zip code
+        // Update isi order
         $order->alamat_pengiriman = $request->input('alamat_pengiriman');
         $order->kode_pos = $request->input('kode_pos');
         $order->save();
@@ -142,21 +143,21 @@ class cartController extends Controller
 
     $userId = Auth::id();
 
-    // Create a new order
+    // Buat order baru
     $order = new Order();
     $order->user_id = $userId;
     $order->alamat_pengiriman = $request->input('alamat_pengiriman');
     $order->kode_pos = $request->input('kode_pos');
     $order->save();
 
-    // Associate carts with this new order
+    // Hubungkan relasi order dan pengguna
     $cartItems = Cart::where('user_id', $userId)->get();
     foreach ($cartItems as $cart) {
         $cart->order_id = $order->id;
         $cart->save();
     }
 
-    // Redirect to cart page with the new order
+    // 
     return redirect()->route('getCart')->with('success', 'New order created successfully!');
 }
 

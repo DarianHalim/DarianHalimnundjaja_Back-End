@@ -35,28 +35,26 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    //Show Cart
-    Route::get('/cart',[cartController::class,'getCart'])->name('getCart');
+
+    //CART
+    //Tunjuk cart
+    Route::get('/cart', [cartController::class, 'getCart'])->name('getCart');
     //add to cart
     Route::post('/cart/add', [cartController::class, 'addToCart'])->name('cartAdd');
-    
-// Route for updating cart quantities
-Route::post('/cart/update', [cartController::class, 'updateCart'])->name('updateCart');
 
-// Route for removing items from the cart
-Route::delete('/cart/remove/{id}', [cartController::class, 'removeFromCart'])->name('removeFromCart');
+    // Route  updating cart jumlah
+    Route::post('/cart/update', [cartController::class, 'updateCart'])->name('updateCart');
 
-Route::get('/order/{order_number}', [cartController::class, 'show'])->name('order.show');
+    // Route remove dari cart
+    Route::delete('/cart/remove/{id}', [cartController::class, 'removeFromCart'])->name('removeFromCart');
 
-Route::post('/order/update', [cartController::class, 'orderUpdate'])->name('orderUpdate');
+    //ORDER
 
+    Route::get('/order/{order_number}', [cartController::class, 'show'])->name('order.show');
 
+    Route::post('/order/update', [cartController::class, 'orderUpdate'])->name('orderUpdate');
 
-
-Route::post('/order/create', [cartController::class, 'createNewOrder'])->name('createNewOrder');
-
-
-Route::resource('archiveCart', ArchiveCartController::class);
+    Route::post('/order/create', [cartController::class, 'createNewOrder'])->name('createNewOrder');
 });
 
 require __DIR__ . '/auth.php';
@@ -75,9 +73,6 @@ Route::get('/signUp', function () {
 })->name('signup');
 
 
-
-
-
 Route::get('/userView', [BarangController::class, 'getKatalog'])->name('getKatalog');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -87,7 +82,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/adminCreate', [BarangController::class, 'getCreatePage'])->name('getCreatePage');
 
     // Route to view all items
-Route::get('/viewBarangPage', [BarangController::class, 'getBarang'])->name('getBarang');
+    Route::get('/viewBarangPage', [BarangController::class, 'getBarang'])->name('getBarang');
 
     // Route for form submission to create a new item
     Route::post('/createBarang', [BarangController::class, 'createBarang'])->name('createBarang');
@@ -101,4 +96,4 @@ Route::get('/viewBarangPage', [BarangController::class, 'getBarang'])->name('get
 
     // Route for deleting an item
     Route::delete('/delete-barang/{id}', [BarangController::class, 'deleteBarang'])->name('deleteBarang');
-}); 
+});

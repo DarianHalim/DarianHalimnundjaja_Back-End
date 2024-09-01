@@ -18,7 +18,7 @@ class Order extends Model
         parent::boot();
 
         static::creating(function ($order) {
-            // Generating a custom order number like 'order1', 'order2', etc.
+            // Buat  custom order number seperti  'order1', 'order2', etc.
             $latestOrder = static::latest()->first();
             $nextOrderNumber = $latestOrder ? intval(str_replace('order', '', $latestOrder->order_number)) + 1 : 1;
             $order->order_number = 'order' . $nextOrderNumber;
